@@ -91,10 +91,10 @@ const VideoUpload = () => {
   return (
     <Box
       sx={{
-        maxWidth: 600,
-        marginTop:"100px",
-        marginLeft:"470px",
-        padding: "20px",
+        maxWidth: 500,
+        margin: "150px auto",
+   
+         padding: "20px",
         display: "flex",
         flexDirection: "column",
         gap: 2,
