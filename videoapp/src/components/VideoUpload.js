@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { TextField, Button, Typography, Box, LinearProgress } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const VideoUpload = () => {
   const [videoData, setVideoData] = useState({ title: "", videoUrl: "" });
   const [videoFile, setVideoFile] = useState(null);
   const [error, setError] = useState("");
   const [uploadProgress, setUploadProgress] = useState(0);
+  const navigate = useNavigate();
 
   const allowedFormats = [
     "video/mp4",
@@ -57,6 +59,7 @@ const VideoUpload = () => {
             const percent = Math.floor((loaded * 100) / total);
             setUploadProgress(percent);
           },
+          timeout: 5 * 60 * 1000,
         }
       );
       return response.data.secure_url;
@@ -78,8 +81,14 @@ const VideoUpload = () => {
         await axios.post("https://streamingapp-livid.vercel.app/videos", {
           title: videoData.title,
           videoUrl,
+
         });
         alert("Video uploaded successfully");
+        
+    
+        setTimeout(() => {
+          navigate("/videos");
+        }, 1000); 
       } catch (error) {
         console.error("Error uploading video metadata:", error);
       }
@@ -93,8 +102,7 @@ const VideoUpload = () => {
       sx={{
         maxWidth: 500,
         margin: "150px auto",
-   
-         padding: "20px",
+        padding: "20px",
         display: "flex",
         flexDirection: "column",
         gap: 2,
@@ -122,14 +130,13 @@ const VideoUpload = () => {
             component="label"
             sx={{
               bgcolor: '#7469B6',
-              '&:hover': { bgcolor: "#303f9f" },
+              '&:hover': { bgcolor: "#AD88C6" },
               marginRight: 2,
             }}
           >
             Select Video
             <input type="file" accept="video/*" hidden onChange={handleFileChange} />
           </Button>
-      
           <Typography variant="body1">
             {videoFile ? videoFile.name : "No file selected"}
           </Typography>
