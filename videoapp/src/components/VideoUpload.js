@@ -75,7 +75,7 @@ const VideoUpload = () => {
     const videoUrl = await uploadToCloudinary(videoFile);
     if (videoUrl) {
       try {
-        await axios.post("http://localhost:8080/videos", {
+        await axios.post("https://streamingapp-livid.vercel.app/videos", {
           title: videoData.title,
           videoUrl,
         });

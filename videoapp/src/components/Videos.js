@@ -9,7 +9,7 @@ const Videos = () => {
 
   const fetchVideos = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/videos");
+      const response = await axios.get("https://streamingapp-livid.vercel.app/videos");
       setVideos(response.data);
     } catch (error) {
       console.error("Error fetching videos:", error);
@@ -19,7 +19,7 @@ const Videos = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this video?")) {
       try {
-        await axios.delete(`http://localhost:8080/videos/${id}`);
+        await axios.delete(`https://streamingapp-livid.vercel.app/videos/${id}`);
         fetchVideos();
       } catch (error) {
         console.error("Error deleting video:", error);
